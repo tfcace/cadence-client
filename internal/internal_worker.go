@@ -39,6 +39,7 @@ import (
 	"time"
 
 	"github.com/opentracing/opentracing-go"
+	otbridge "go.opentelemetry.io/otel/bridge/opentracing"
 	"github.com/pborman/uuid"
 	"github.com/uber-go/tally"
 	"go.uber.org/cadence/.gen/go/cadence/workflowserviceclient"
@@ -1275,7 +1276,12 @@ func augmentWorkerOptions(options WorkerOptions) WorkerOptions {
 
 	// if the user passes in a tracer then add a tracing context propagator
 	if options.Tracer != nil {
-		options.ContextPropagators = append(options.ContextPropagators, NewTracingContextPropagator(options.Logger, options.Tracer))
+		switch options.Tracer.(type) {
+		case *otbridge.BridgeTracer:
+			options.ContextPropagators = append(options.ContextPropagators, NewOtelBridgeTracingContextPropagator(zap.NewNop(), options.Tracer))
+		default:
+			options.ContextPropagators = append(options.ContextPropagators, NewTracingContextPropagator(zap.NewNop(), options.Tracer))
+		}
 	} else {
 		options.Tracer = opentracing.NoopTracer{}
 	}
