@@ -4,7 +4,6 @@ go 1.13
 
 require (
 	github.com/apache/thrift v0.0.0-20161221203622-b2a4d4ae21c7
-	github.com/cristalhq/jwt/v3 v3.1.0 // indirect
 	github.com/facebookgo/clock v0.0.0-20150410010913-600d898af40a
 	github.com/gogo/protobuf v1.3.2
 	github.com/golang/mock v1.4.4
@@ -15,10 +14,9 @@ require (
 	github.com/sirupsen/logrus v1.4.2
 	github.com/stretchr/testify v1.7.1
 	github.com/uber-go/tally v3.3.15+incompatible
-	github.com/uber/cadence-idl v0.0.0-20220505064515-7bb6b0808383 // indirect
 	github.com/uber/jaeger-client-go v2.22.1+incompatible
 	github.com/uber/tchannel-go v1.16.0
-	go.opentelemetry.io/otel/bridge/opentracing v1.7.0 // indirect
+	go.opentelemetry.io/otel/bridge/opentracing v1.7.0
 	go.uber.org/atomic v1.7.0
 	go.uber.org/fx v1.13.1
 	go.uber.org/goleak v1.0.0
